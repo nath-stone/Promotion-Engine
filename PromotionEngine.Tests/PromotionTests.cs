@@ -23,6 +23,7 @@ namespace PromotionEngine.Tests
                                                               };
 
         [TestMethod]
+        [DataRow(100, "A", "B", "C")]
         public void FixedPricePromotions(decimal expectedTotal, params string[] cartItemIds)
         {
             var cart = new Cart();
