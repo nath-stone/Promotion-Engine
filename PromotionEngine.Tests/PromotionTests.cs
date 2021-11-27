@@ -18,9 +18,9 @@ namespace PromotionEngine.Tests
                                                                               { "D", new Product("D", 15) }
                                                                           };
 
-        private readonly IEnumerable<Promotion> _promotions = new List<Promotion>
-                                                              {
-                                                              };
+        private readonly IEnumerable<IPromotion> _promotions = new List<IPromotion>
+                                                               {
+                                                               };
 
         [TestMethod]
         [DataRow(100, "A", "B", "C")]
