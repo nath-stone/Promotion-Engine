@@ -1,6 +1,6 @@
 ﻿namespace PromotionEngine
 {
-    public class SameItemFixedPricePromotion : IPromotion
+    public class SameItemFixedPricePromotion : IFixedPricePromotion
     {
         public string ProductId { get; }
         public int CountRequired { get; }

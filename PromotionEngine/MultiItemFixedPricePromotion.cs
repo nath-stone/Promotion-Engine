@@ -1,6 +1,6 @@
 ﻿namespace PromotionEngine
 {
-    public class MultiItemFixedPricePromotion : IPromotion
+    public class MultiItemFixedPricePromotion : IFixedPricePromotion
     {
         public IReadOnlyCollection<string> ProductIds { get; }
         public decimal FixedPrice { get; }
