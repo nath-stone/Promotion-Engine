@@ -21,16 +21,16 @@
 
         public decimal CalculateReduction(IEnumerable<IProduct> products)
         {
-            var applicableItems = products.Where(x => x.Id == ProductId).ToList();
+            var relevantItems = products.Where(x => x.Id == ProductId).ToList();
 
-            var numberOfApplicableItems = applicableItems.Count(x => x.Id == ProductId);
+            var numberOfApplicableItems = relevantItems.Count(x => x.Id == ProductId);
 
             if (numberOfApplicableItems < CountRequired)
                 return 0;
 
             var promotionApplyCount = (int)Math.Floor((double)numberOfApplicableItems / CountRequired);
-            var itemTotal = applicableItems.Sum(x => x.Price);
-            var itemsNotApplicable = applicableItems.Take(numberOfApplicableItems % CountRequired);
+            var itemTotal = relevantItems.Sum(x => x.Price);
+            var itemsNotApplicable = relevantItems.Take(numberOfApplicableItems % CountRequired);
             var itemsNotApplicableTotal = itemsNotApplicable.Sum(x => x.Price);
 
             return itemTotal - itemsNotApplicableTotal - (promotionApplyCount * FixedPrice);
