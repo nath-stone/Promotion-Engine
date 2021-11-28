@@ -20,10 +20,13 @@ namespace PromotionEngine.Tests
 
         private readonly IEnumerable<IPromotion> _promotions = new List<IPromotion>
                                                                {
+                                                                   new SameItemFixedPricePromotion("A", 3, 130),
+                                                                   new SameItemFixedPricePromotion("B", 2, 45)
                                                                };
 
         [TestMethod]
         [DataRow("100", "A", "B", "C")]
+        [DataRow("370", "A", "A", "A", "A", "A", "B", "B", "B", "B", "B", "C")]
         public void FixedPricePromotions(string expectedTotalString, params string[] cartItemIds)
         {
             var expectedTotal = decimal.Parse(expectedTotalString);
