@@ -28,6 +28,7 @@ namespace PromotionEngine.Tests
         [TestMethod]
         [DataRow("100", "A", "B", "C")]
         [DataRow("370", "A", "A", "A", "A", "A", "B", "B", "B", "B", "B", "C")]
+        [DataRow("280", "A", "A", "A", "B", "B", "B", "B", "B", "C", "D")]
         public void FixedPricePromotions(string expectedTotalString, params string[] cartItemIds)
         {
             var expectedTotal = decimal.Parse(expectedTotalString);
