@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PromotionEngine.Tests
 {
     [TestClass]
-    internal class PromotionTests
+    public class PromotionTests
     {
         private readonly IReadOnlyDictionary<string, Product> _products = new Dictionary<string, Product>
                                                                           {
@@ -23,9 +23,10 @@ namespace PromotionEngine.Tests
                                                                };
 
         [TestMethod]
-        [DataRow(100, "A", "B", "C")]
-        public void FixedPricePromotions(decimal expectedTotal, params string[] cartItemIds)
+        [DataRow("100", "A", "B", "C")]
+        public void FixedPricePromotions(string expectedTotalString, params string[] cartItemIds)
         {
+            var expectedTotal = decimal.Parse(expectedTotalString);
             var cart = new Cart();
 
             foreach (var cartItemId in cartItemIds)
