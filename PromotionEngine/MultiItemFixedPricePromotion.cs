@@ -18,14 +18,28 @@
 
         public decimal CalculateReduction(IEnumerable<IProduct> products)
         {
-            var applicableItems = products.Where(x => ProductIds.Contains(x.Id)).ToList();
+            var relevantItems = products.Where(x => ProductIds.Contains(x.Id)).ToList();
 
+            var fewestApplicableItemCount = GetFewestApplicableItemCount(relevantItems);
+
+            if (fewestApplicableItemCount == 0)
+                return 0;
+
+            var itemsNotApplicable = GetItemsNotApplicable(relevantItems, fewestApplicableItemCount);
+            var itemTotal = relevantItems.Sum(x => x.Price);
+            var itemsNotApplicableTotal = itemsNotApplicable.Sum(x => x.Price);
+
+            return itemTotal - itemsNotApplicableTotal - (fewestApplicableItemCount * FixedPrice);
+        }
+
+        private int GetFewestApplicableItemCount(IList<IProduct> items)
+        {
             var fewestApplicableItemCount = 0;
             var fewestApplicableItemCountSet = false;
 
             foreach (var productId in ProductIds)
             {
-                var itemCount = applicableItems.Count(x => x.Id == productId);
+                var itemCount = items.Count(x => x.Id == productId);
 
                 if (!fewestApplicableItemCountSet)
                 {
@@ -38,21 +52,17 @@
                     fewestApplicableItemCount = itemCount;
             }
 
-            if (fewestApplicableItemCount == 0)
-                return 0;
+            return fewestApplicableItemCount;
+        }
 
+        private IEnumerable<IProduct> GetItemsNotApplicable(IEnumerable<IProduct> items, int fewestApplicableCount)
+        {
             var itemsNotApplicable = new List<IProduct>();
+            
+            foreach (var itemGroup in items.GroupBy(x => x.Id))
+                itemsNotApplicable.AddRange(itemGroup.Skip(fewestApplicableCount));
 
-            foreach (var item in applicableItems)
-            {
-                if (itemsNotApplicable.Count(x => x.Id == item.Id) == fewestApplicableItemCount)
-                    itemsNotApplicable.Add(item);
-            }
-
-            var itemTotal = applicableItems.Sum(x => x.Price);
-            var itemsNotApplicableTotal = itemsNotApplicable.Sum(x => x.Price);
-
-            return itemTotal - itemsNotApplicableTotal - (fewestApplicableItemCount * FixedPrice);
+            return itemsNotApplicable;
         }
     }
 }
