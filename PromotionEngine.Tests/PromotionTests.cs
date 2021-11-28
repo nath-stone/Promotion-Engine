@@ -21,7 +21,8 @@ namespace PromotionEngine.Tests
         private readonly IEnumerable<IPromotion> _promotions = new List<IPromotion>
                                                                {
                                                                    new SameItemFixedPricePromotion("A", 3, 130),
-                                                                   new SameItemFixedPricePromotion("B", 2, 45)
+                                                                   new SameItemFixedPricePromotion("B", 2, 45),
+                                                                   new MultiItemFixedPricePromotion(new List<string> { "C", "D" }, 30)
                                                                };
 
         [TestMethod]
