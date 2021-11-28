@@ -13,13 +13,13 @@
             FixedPrice = fixedPrice;
         }
 
-        public bool IsSatisfied(IEnumerable<Product> products)
+        public bool IsSatisfied(IEnumerable<IProduct> products)
         {
             var numberOfApplicableItems = products.Count(x => x.Id == ProductId);
             return numberOfApplicableItems >= CountRequired;
         }
 
-        public decimal CalculateReduction(IEnumerable<Product> products)
+        public decimal CalculateReduction(IEnumerable<IProduct> products)
         {
             var applicableItems = products.Where(x => x.Id == ProductId).ToList();
 

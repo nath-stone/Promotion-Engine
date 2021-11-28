@@ -1,8 +1,8 @@
 ﻿namespace PromotionEngine
 {
-    public class Cart
+    public class Cart : ICart
     {
-        public IList<Product> Items { get; } = new List<Product>();
+        public IList<IProduct> Items { get; } = new List<IProduct>();
 
         public IList<IPromotion> AppliedPromotions { get; } = new List<IPromotion>();
 

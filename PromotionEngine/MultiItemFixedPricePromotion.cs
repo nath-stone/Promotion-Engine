@@ -11,12 +11,12 @@
             FixedPrice = fixedPrice;
         }
 
-        public bool IsSatisfied(IEnumerable<Product> products)
+        public bool IsSatisfied(IEnumerable<IProduct> products)
         {
             return ProductIds.All(productId => products.Any(product => product.Id == productId));
         }
 
-        public decimal CalculateReduction(IEnumerable<Product> products)
+        public decimal CalculateReduction(IEnumerable<IProduct> products)
         {
             var applicableItems = products.Where(x => ProductIds.Contains(x.Id)).ToList();
 
@@ -41,7 +41,7 @@
             if (fewestApplicableItemCount == 0)
                 return 0;
 
-            var itemsNotApplicable = new List<Product>();
+            var itemsNotApplicable = new List<IProduct>();
 
             foreach (var item in applicableItems)
             {

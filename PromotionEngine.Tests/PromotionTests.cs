@@ -10,7 +10,7 @@ namespace PromotionEngine.Tests
     [TestClass]
     public class PromotionTests
     {
-        private readonly IReadOnlyDictionary<string, Product> _products = new Dictionary<string, Product>
+        private readonly IReadOnlyDictionary<string, IProduct> _products = new Dictionary<string, IProduct>
                                                                           {
                                                                               { "A", new Product("A", 50) },
                                                                               { "B", new Product("B", 30) },

@@ -1,6 +1,6 @@
 ﻿namespace PromotionEngine
 {
-    public class Product
+    public class Product : IProduct
     {
         public string Id { get; }
 
